@@ -25,7 +25,8 @@ drumButton.forEach(button => {
     //play the matched sound
     makeSound(letterButton, arraySounds);
   
-    
+    //active button
+    activeButton(letterButton);
   })
 });
 
@@ -35,12 +36,22 @@ document.addEventListener("keydown", (event)=>{
 
   if(arraySounds.hasOwnProperty(keyName)){
     makeSound(keyName, arraySounds);
+    activeButton(keyName);
   }
 });
 
 
-//function
+//functions
 function makeSound(keyString, arraySounds){
   const soundPath = arraySounds[keyString];
   (new Audio(soundPath)).play();
+}
+
+function activeButton(keyChar){
+  const button = document.querySelector("." + keyChar);
+  
+  button.classList.add("pressed");
+  setTimeout(()=>{button.classList.remove("pressed")}, 100);
+  
+  //button.classList.remove("pressed");
 }
